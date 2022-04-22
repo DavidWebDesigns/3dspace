@@ -6,7 +6,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 const scene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(460, window.innerWidth / window.innerHeight, 0.006, 200 );
+const camera = new THREE.PerspectiveCamera(400, window.innerWidth / window.innerHeight, 0.006, 200 );
 
 //Field of view 75 on camera, second argument is aspect ratio, based on browser window, and the last two are view frustrum (visbility relative to the camera)
 
@@ -57,8 +57,8 @@ torus4.rotation.y += 33;
 const sunLight = new THREE.AmbientLight(0xfefebe, 1.6);
 scene.add(sunLight);
 
-const pointLight = new THREE.PointLight(0x99f1b9, 0.6);
-pointLight.position.set(0,-2,0);
+const pointLight = new THREE.PointLight(0x99f1b9, 0.9);
+pointLight.position.set(0,-1.8, 0);
 
 scene.add(pointLight);
 
@@ -84,7 +84,7 @@ loader.load(
 		gltf.scenes; // Array<THREE.Group>
 		gltf.cameras; // Array<THREE.Camera>
 		gltf.asset; // Object
-		
+
 		scene.add( gltf.scene );
 
 	},
@@ -111,11 +111,11 @@ function animate() {
 
 	torus2.rotation.x -= 0.012;
 	torus2.rotation.y -= 0.0003;
-	torus2.rotation.z -= 0.019;
+	torus2.rotation.z -= 0.016;
 
 	torus3.rotation.x += 0.012;
 	torus3.rotation.y += 0.0003;
-	torus3.rotation.z += 0.019;
+	torus3.rotation.z += 0.016;
 
 	torus4.rotation.x -= 0.012;
 	torus4.rotation.y -= 0.0006;
@@ -126,3 +126,13 @@ function animate() {
     renderer.render( scene, camera );
 }
 animate();
+
+// function moveCamera () {
+// 	const t = document.body.getBoundingClientRect().top;
+	
+// 	camera.position.z = t * -0.00001;
+// 	camera.position.x = t * -0.000001;
+// 	camera.position.y = t * -0.000000001;
+
+// }
+// document.body.onscroll = moveCamera;
