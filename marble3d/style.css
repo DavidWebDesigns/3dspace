@@ -10,7 +10,7 @@ canvas {
 }
 main {
   position: absolute;
-  height: 100vh;
+  height: 150vh;
   width: 100vw;
   display: flex;
   justify-content: center;

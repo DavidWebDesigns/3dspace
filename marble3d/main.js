@@ -17,7 +17,9 @@ const renderer = new THREE.WebGL1Renderer({
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.setSize( window.innerWidth, window.innerHeight );
 
-camera.position.setZ(20);
+camera.position.setZ(55);
+// camera.position.setY(1);
+// camera.position.setX(1);
 // renderer.render( scene, camera );
 
 
@@ -36,10 +38,12 @@ Array(200).fill().forEach(addStar)
 
 
 //tris parameters
-const geometry = new THREE.TorusGeometry( 12, 0.1, 6, 3 );
+const geometry = new THREE.SphereGeometry(18, 9 , 9);
+
+// const geometry = new THREE.TorusGeometry( 16, 8, 16, 28 );
 // const material = new THREE.MeshBasicMaterial({ color: 0x44a64d, wireframe: true });
-const material = new THREE.MeshStandardMaterial({ color: 0x44a64d, wireframe: false });
-const material2 = new THREE.MeshStandardMaterial({ color: 0x66ff33, wireframe: false });
+const material = new THREE.MeshStandardMaterial({ color: 0x44a64d, wireframe: true });
+const material2 = new THREE.MeshStandardMaterial({ color: 0x88ff33, wireframe: true });
 // color 88ff33
 const torus = new THREE.Mesh( geometry, material2 );
 const torus2 = new THREE.Mesh( geometry, material );
@@ -47,11 +51,19 @@ const torus3 = new THREE.Mesh( geometry, material2 );
 const torus4 = new THREE.Mesh( geometry, material );
 
 scene.add(torus);
-scene.add(torus2);
-scene.add(torus3);
+// scene.add(torus2);
+// scene.add(torus3);
 scene.add(torus4);
-torus2.rotation.x -= 33;
+
+torus.rotation.z -= 33;
+torus.rotation.y += 66;
+
+torus2.rotation.y -= 33;
+torus2.rotation.x -= 45;
+
 torus3.rotation.y -= 33;
+
+torus4.rotation.z -= 33;
 torus4.rotation.y += 33;
 
 const sunLight = new THREE.AmbientLight(0xfefebe, 1.6);
@@ -105,34 +117,35 @@ loader.load(
 
 function animate() {
     requestAnimationFrame(animate);
-    torus.rotation.x += 0.012;
-	torus.rotation.y += 0.0006;
-	torus.rotation.z += 0.012;
+    // torus.rotation.x += 0.012;
+	torus.rotation.y += 0.008;
+	// torus.rotation.z += 0.012;
 
-	torus2.rotation.x -= 0.012;
-	torus2.rotation.y -= 0.0003;
-	torus2.rotation.z -= 0.016;
+	// torus2.rotation.x -= 0.012;
+	// torus2.rotation.y -= 0.0003;
+	// torus2.rotation.z -= 0.016;
 
-	torus3.rotation.x += 0.012;
-	torus3.rotation.y += 0.0003;
-	torus3.rotation.z += 0.016;
+	// torus3.rotation.x += 0.012;
+	// torus3.rotation.y += 0.0003;
+	// torus3.rotation.z += 0.016;
 
-	torus4.rotation.x -= 0.012;
-	torus4.rotation.y -= 0.0006;
-	torus4.rotation.z = 0.012;
+	// torus4.rotation.x -= 0.012;
+	torus4.rotation.y -= 0.008;
+	// torus4.rotation.z -= 0.012;
 
 
-	scene.rotation.y += 0.003;
+	scene.rotation.y += 0.0009;
     renderer.render( scene, camera );
 }
 animate();
 
-// function moveCamera () {
-// 	const t = document.body.getBoundingClientRect().top;
-	
-// 	camera.position.z = t * -0.00001;
-// 	camera.position.x = t * -0.000001;
-// 	camera.position.y = t * -0.000000001;
+function moveCamera () {
+	const t = document.body.getBoundingClientRect().top;
 
-// }
-// document.body.onscroll = moveCamera;
+	camera.position.z = 55 + t * -0.12;
+	camera.position.x = t * -0.0001;
+	camera.position.y = t * 0.00001;
+	console.log(t);
+
+}
+document.body.onscroll = moveCamera;
